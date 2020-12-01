@@ -1,6 +1,7 @@
 from flask import Flask
-from flask import request
+#from flask import request
 from flask import render_template
+import cv2
 #import stringComparison
 
 app = Flask(__name__)
@@ -8,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def my_form():
     #return 'test'
-    return render_template("home.html") # this should be the name of your html file
+    return render_template("index.html") # this should be the name of your html file
 
 #@app.route('/', methods=['POST'])
 #def my_form_post():
@@ -24,5 +25,7 @@ def my_form():
 #def hello_world():
 #    return 'Hello, World!'
 
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
