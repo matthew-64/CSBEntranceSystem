@@ -6,15 +6,14 @@ import CardScanner
 #import stringComparison
 
 app = Flask(__name__)
-
+#https://stackoverflow.com/questions/46482475/how-handle-a-button-click-on-python-flask/46482985
 @app.route('/')
 def my_form():
-    #scanner = CardScanner()
     app.logger.info(CardScanner.scan())
-    #app.logger.info("STARTING")
 
-    #text1 = request.form['text1']
-    #text2 = request.form['text2']
+    if request.method == "POST":
+        print("IS a post request")
+
     return render_template("test.html")
 
 #@app.route('/', methods=['POST'])
