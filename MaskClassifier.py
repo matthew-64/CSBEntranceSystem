@@ -17,8 +17,8 @@ def classify(image):
 
         json_response_predictions = json.loads(r.text)["predictions"]
 
-        mask_probability = 0.0;
-        nomask_probability = 0.0;
+        mask_probability = 0.0
+        nomask_probability = 0.0
         for prediction in json_response_predictions:
             if prediction["tagName"] == "mask":
                 mask_probability = float(prediction["probability"])

@@ -60,8 +60,10 @@
         <div class="camera">
             <video id="video">Video stream not available.</video>
         </div>
-        <div><button id="startbutton">Take photo</button></div>
         <canvas id="canvas"></canvas>
+            <form>
+                <a href=# id=test><button class='btn btn-default'>Scan Student Card</button></a>
+            </form>
     </div>
 
     <script>
@@ -147,6 +149,20 @@
         window.addEventListener('load', startup, false);
     })();
     </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('a#test').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/background_process_test',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
 
 </body>
 
