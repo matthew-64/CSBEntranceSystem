@@ -19,5 +19,5 @@ def hasMaskExemption(student_num):
 
 
 
-print(hasMaskExemption("3"))
+#print(hasMaskExemption("3"))
 

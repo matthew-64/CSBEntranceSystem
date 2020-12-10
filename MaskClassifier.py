@@ -4,8 +4,8 @@ import CustomEnum
 
 CONFIDENCE_THRESHOLD = 0.5;
 
-def classify(image):
-    with open("config.json") as config, open(image, mode="rb") as test_data:
+def is_wearing_mask():
+    with open("config.json") as config, open("inputData/test_img.jpg", mode="rb") as test_data:
         customvision_data = json.load(config)["customvision"]
         endpoint = customvision_data["endpoint"]
         prediction_key = customvision_data["prediction_key"]
@@ -25,14 +25,15 @@ def classify(image):
             elif prediction["tagName"] == "nomask":
                 nomask_probability = float(prediction["probability"])
 
+        return mask_probability > nomask_probability
         #print(mask_probability)
         #print(nomask_probability)
 
-        if mask_probability < CONFIDENCE_THRESHOLD and nomask_probability < CONFIDENCE_THRESHOLD:
-            return CustomEnum.MaskEnum.UNKNOWN
-        if mask_probability > nomask_probability:
-            return CustomEnum.MaskEnum.MASK
-        else:
-            return CustomEnum.MaskEnum.MASK
+        #if mask_probability < CONFIDENCE_THRESHOLD and nomask_probability < CONFIDENCE_THRESHOLD:
+        #    return CustomEnum.MaskEnum.UNKNOWN
+        #if mask_probability > nomask_probability:
+        #    return CustomEnum.MaskEnum.MASK
+        #else:
+        #    return CustomEnum.MaskEnum.MASK
 
-classify("inputData/test_img.jpg")
+#classify("inputData/test_img.jpg")

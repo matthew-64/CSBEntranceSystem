@@ -1,39 +1,71 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from flask import redirect
 import cv2
 import CardScanner
 import random
+import InfectedChecker
+import CloseContactChecker
+import MaskExemption
+import Camera
+import MaskClassifier
 #import stringComparison
 
 app = Flask(__name__)
-#https://stackoverflow.com/questions/46482475/how-handle-a-button-click-on-python-flask/46482985
 @app.route('/', methods=["GET", "POST"])
 def my_form():
-    student_num = request.form["student_num"]
-    print(student_num)
-    return render_template("test.html", message=student_num)
+    return render_template("test.html")
+    #print(request.form["blah"])
+    student_num = "-1"
+    #student_num = request.form["student_num"]
+    try:
+        student_num = request.form.get["student_num"]
+    except(Exception):
+        print("ILL USE -1 THIS TIME...")
+    if student_num == "-1":
+        return render_template("test.html", message="hello")
 
-#background process happening without any refreshing
-#@app.route('/background_process_test')
-#def background_process_test():
+    print("Checking for positive test result")
+    if InfectedChecker.isInfected(student_num):
+        return render_template("test.html", message="Sorry you have had a positive test recently. Entry denied.")
 
-#    print("Checking ")
-#    print ("Hello")
-#    return
+    if CloseContactChecker.isContact(student_num):
+        return render_template("test.html", message="You have been in close contact with a positive case. Entry denied.")
 
-# when got, this method is called
-# Preform the calculations here, and then return the result :)
-#@app.route("/data", methods=["GET", "POST"])
-#def data():
-    #data = "THIS IS UPDATED"
-    #response = make_response(json.dumps(data))
-    #response.content_type = "application/json"
-#    return str(random.randrange(0, 10))
+    if not MaskExemption.hasMaskExemption(student_num):
+        Camera.take_picture()
+        if not MaskClassifier.is_wearing_mask():
+            return render_template("test.html",
+                                   message="Please wear a mask and try again.")
+    #print("Checking for close contact")
 
-#@app.route("/msg")
-#def update_msg():
-#    return render_template("test.html", message="MY MESSAGE")
+    #print("Check for mask exemption")
+
+    #print("Check if wearing mask")
+    #student_num = request.form["student_num"]
+    #print(student_num)
+    return render_template("test.html", message="Doors opening. Please enter.")
+
+@app.route('/scan', methods = ['POST'])
+def signup():
+    student_num = request.form['student_number']
+
+    print("Checking for positive test result")
+    if InfectedChecker.isInfected(student_num):
+        return render_template("test.html", message="Sorry you have had a positive test recently. Entry denied.")
+
+    print("Checking for close contact")
+    if CloseContactChecker.isContact(student_num):
+        return render_template("test.html", message="You have been in close contact with a positive case. Entry denied.")
+
+    if not MaskExemption.hasMaskExemption(student_num):
+        Camera.take_picture()
+        if not MaskClassifier.is_wearing_mask():
+            return render_template("test.html",
+                                   message="Please wear a mask and try again.")
+    return render_template("test.html", message="Welcome. Doors opening.")
+    #return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)

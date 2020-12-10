@@ -2,10 +2,9 @@ import pyodbc
 import json
 
 
-def isContact(student_num):
+def isInfected(student_num):
     with open("config.json") as config:
         close_contact_db_config = json.load(config)["selfreportDB"]
-        print(close_contact_db_config)
         server = close_contact_db_config["server"]
         database = close_contact_db_config["database"]
         username = close_contact_db_config["username"]
@@ -14,9 +13,9 @@ def isContact(student_num):
         with pyodbc.connect(
                 'DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password) as conn:
             with conn.cursor() as cursor:
-                cursor.execute("select studentNum from close_contact where studentNum LIKE " + str(student_num))
+                cursor.execute("select studentNum from self_report")
+                print(cursor.fetchone())
+                cursor.execute("select studentNum from self_report where studentNum LIKE " + str(student_num))
                 row = cursor.fetchone()
                 return row != None
 
-
-#print(isContact("11"))

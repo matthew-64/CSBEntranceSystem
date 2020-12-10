@@ -61,10 +61,14 @@
             <video id="video">Video stream not available.</video>
         </div>
         <canvas id="canvas"></canvas>
-            <form method="POST">
+            <form methods="POST">
                 <a href=# id=update><button class='btn btn-default'>Scan Student Card</button></a>
                 <input type="text" name="student_num">
             </form>
+            <form action="/scan" method="post">
+  <input type="text" name="student_number"></input>
+  <input type="submit" value="Signup"></input>
+</form>
             <p id="tutorial">
                 {{message}}
             </p>
