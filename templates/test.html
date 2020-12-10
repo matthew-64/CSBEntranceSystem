@@ -61,9 +61,14 @@
             <video id="video">Video stream not available.</video>
         </div>
         <canvas id="canvas"></canvas>
-            <form>
-                <a href=# id=test><button class='btn btn-default'>Scan Student Card</button></a>
+            <form method="POST">
+                <a href=# id=update><button class='btn btn-default'>Scan Student Card</button></a>
+                <input type="text" name="student_num">
             </form>
+            <p id="tutorial">
+                {{message}}
+            </p>
+
     </div>
 
     <script>
@@ -164,6 +169,26 @@
         });
 </script>
 
+<script>
+    function requestData()
+    {
+        var requests = $.get("/data");
+        var result = requests.done(function (result) {
+            document.getElementById("p1").innerHTML = "result";
+            console.log("TEMPERATURE", result);
+            setTimeout(requestData, 100);
+        });
+        // $(document).ready(function () {
+            
+        // });
+    }
+</script>
+<script>
+function studentNumPopup() {
+  var studentNum = prompt("Please enter student number:")
+
+}
+</script>
 </body>
 
 </html>
