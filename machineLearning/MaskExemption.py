@@ -17,7 +17,3 @@ def hasMaskExemption(student_num):
                 row = cursor.fetchone()
                 return row != None
 
-
-
-#print(hasMaskExemption("3"))
-

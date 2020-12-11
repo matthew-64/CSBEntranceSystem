@@ -49,25 +49,22 @@
         text-align: center;
     }
     </style>
-    <title>My Favorite Sport</title>
+    <title>Entrance system</title>
 </head>
 
 <body>
     <div class="contentarea">
         <h1>
-            Using Javascript to capture Photo
+            Welcome to the CSB
         </h1>
         <div class="camera">
             <video id="video">Video stream not available.</video>
         </div>
         <canvas id="canvas"></canvas>
-            <form methods="POST">
-                <a href=# id=update><button class='btn btn-default'>Scan Student Card</button></a>
-                <input type="text" name="student_num">
-            </form>
+
             <form action="/scan" method="post">
   <input type="text" name="student_number"></input>
-  <input type="submit" value="Signup"></input>
+  <input type="submit" value="scan card"></input>
 </form>
             <p id="tutorial">
                 {{message}}

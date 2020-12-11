@@ -14,7 +14,6 @@ def isInfected(student_num):
                 'DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password) as conn:
             with conn.cursor() as cursor:
                 cursor.execute("select studentNum from self_report")
-                print(cursor.fetchone())
                 cursor.execute("select studentNum from self_report where studentNum LIKE " + str(student_num))
                 row = cursor.fetchone()
                 return row != None

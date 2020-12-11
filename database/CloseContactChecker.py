@@ -5,7 +5,6 @@ import json
 def isContact(student_num):
     with open("config.json") as config:
         close_contact_db_config = json.load(config)["selfreportDB"]
-        print(close_contact_db_config)
         server = close_contact_db_config["server"]
         database = close_contact_db_config["database"]
         username = close_contact_db_config["username"]
@@ -19,4 +18,3 @@ def isContact(student_num):
                 return row != None
 
 
-#print(isContact("11"))

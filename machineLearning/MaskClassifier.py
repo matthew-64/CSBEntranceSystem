@@ -1,6 +1,5 @@
 import requests
 import json
-import CustomEnum
 
 CONFIDENCE_THRESHOLD = 0.5;
 
@@ -12,8 +11,6 @@ def is_wearing_mask():
         content_type = customvision_data["content_type"]
 
         r = requests.post(endpoint, headers={"Prediction-Key": prediction_key, "Content-Type": content_type}, data=test_data)
-        #print(r.status_code)
-        #print(r.text)
 
         json_response_predictions = json.loads(r.text)["predictions"]
 
@@ -26,14 +23,4 @@ def is_wearing_mask():
                 nomask_probability = float(prediction["probability"])
 
         return mask_probability > nomask_probability
-        #print(mask_probability)
-        #print(nomask_probability)
 
-        #if mask_probability < CONFIDENCE_THRESHOLD and nomask_probability < CONFIDENCE_THRESHOLD:
-        #    return CustomEnum.MaskEnum.UNKNOWN
-        #if mask_probability > nomask_probability:
-        #    return CustomEnum.MaskEnum.MASK
-        #else:
-        #    return CustomEnum.MaskEnum.MASK
-
-#classify("inputData/test_img.jpg")
