@@ -2,7 +2,7 @@
 An entrance has the opportunity to become the first line of defence against Covid by enforcement of regulations such as 
 quarantine and facemask wearing to keep everyone safe and the building open.
 
-**Please see [final_report.pdf](https://github.com/matthew-64/CSBEntranceSystem/blob/main/final_report.pdf) which contains
+**Please see [`final_report.pdf`](https://github.com/matthew-64/CSBEntranceSystem/blob/main/final_report.pdf) which contains
 the full details of the Covid Secure Entrance System.**
 
 ### End user experience
